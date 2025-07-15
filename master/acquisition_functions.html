@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.02cb18745d09eea51.min.css?v=ff456132" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.c5589c0bd87d933a4.min.css?v=eeeb54bc" />
         <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css?v=2aa19091" />
     <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -61,6 +61,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#Saving-and-loading-with-custom-acquisition-functions" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -359,9 +364,41 @@
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/acquisition_functions.ipynb (reference label)" class="md-ellipsis">Acquisition Functions</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="#" class="md-nav__link md-nav__link--active">
         <span title="/acquisition_functions.ipynb (reference label)" class="md-ellipsis">Acquisition Functions</span>
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/acquisition_functions.ipynb (reference label)" class="md-ellipsis">Acquisition Functions</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Saving-and-loading-with-custom-acquisition-functions" class="md-nav__link">
+    <span title="/acquisition_functions.ipynb#saving-and-loading-with-custom-acquisition-functions (reference label)" class="md-ellipsis">Saving and loading with custom acquisition functions</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -574,9 +611,26 @@
                   <div class="md-sidebar__inner">
                     
 
+  
+
 <nav class="md-nav md-nav--secondary">
   
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/acquisition_functions.ipynb (reference label)" class="md-ellipsis">Acquisition Functions</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Saving-and-loading-with-custom-acquisition-functions" class="md-nav__link">
+    <span title="/acquisition_functions.ipynb#saving-and-loading-with-custom-acquisition-functions (reference label)" class="md-ellipsis">Saving and loading with custom acquisition functions</span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -608,6 +662,8 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">gridspec</span>
+
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
 </code></pre></div>
 </div>
 </div>
@@ -680,8 +736,8 @@
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">GreedyAcquisition</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">base_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">mean</span> <span class="c1"># disregard std</span>
@@ -692,8 +748,8 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">acquisition_function</span> <span class="o">=</span> <span class="n">GreedyAcquisition</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BayesianOptimization</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span> <span class="n">acquisition_function</span><span class="o">=</span><span class="n">acquisition_function</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">173</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">acquisition_function</span> <span class="o">=</span> <span class="n">GreedyAcquisition</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BayesianOptimization</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span> <span class="n">acquisition_function</span><span class="o">=</span><span class="n">acquisition_function</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span><span class="n">init_points</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="n">plot_gp</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
@@ -707,17 +763,17 @@
 <div class="highlight"><pre>
 |   iter    |  target   |     x     |
 -------------------------------------
-| <span class="ansi-black-fg">1         | </span><span class="ansi-black-fg">0.5721    | </span><span class="ansi-black-fg">-0.8809   |
-| </span><span class="ansi-magenta-fg">2         | </span><span class="ansi-magenta-fg">0.9973    | </span><span class="ansi-magenta-fg">6.511     |
-| </span><span class="ansi-black-fg">3         | </span><span class="ansi-black-fg">0.7985    | </span><span class="ansi-black-fg">4.267     |
-| </span><span class="ansi-black-fg">4         | </span><span class="ansi-black-fg">0.9958    | </span><span class="ansi-black-fg">6.525     |
-| </span><span class="ansi-magenta-fg">5         | </span><span class="ansi-magenta-fg">1.024     | </span><span class="ansi-magenta-fg">6.132     |
-| </span><span class="ansi-magenta-fg">6         | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">6.024     |
-| </span><span class="ansi-magenta-fg">7         | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">5.975     |
-| </span><span class="ansi-magenta-fg">8         | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">5.964     |
-| </span><span class="ansi-magenta-fg">9         | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">5.962     |
-| </span><span class="ansi-magenta-fg">10        | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">5.961     |
-=====================================</span>
+| 1         | 1.2141683 | 2.4944814 |
+| 2         | 0.3240816 | 9.4085716 |
+| 3         | 0.9616628 | 6.7839273 |
+| 4         | 1.2141034 | 2.4945789 |
+| <span class="ansi-magenta-fg">5        </span> | <span class="ansi-magenta-fg">1.2213315</span> | <span class="ansi-magenta-fg">2.4836524</span> |
+| <span class="ansi-magenta-fg">6        </span> | <span class="ansi-magenta-fg">1.3813338</span> | <span class="ansi-magenta-fg">2.1554093</span> |
+| <span class="ansi-magenta-fg">7        </span> | <span class="ansi-magenta-fg">1.3904450</span> | <span class="ansi-magenta-fg">1.8852594</span> |
+| <span class="ansi-magenta-fg">8        </span> | <span class="ansi-magenta-fg">1.4018873</span> | <span class="ansi-magenta-fg">2.0042391</span> |
+| 9         | 1.4018855 | 2.0045401 |
+| 10        | 1.4018849 | 2.0046339 |
+=====================================
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -743,8 +799,8 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ThompsonSampling</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">AcquisitionFunction</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">random_state</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">base_acq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">y_cov</span><span class="p">):</span>
         <span class="k">assert</span> <span class="n">y_cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">y_cov</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;y_cov must be a square matrix.&quot;</span>
@@ -768,9 +824,10 @@
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_acq</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">acq</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">suggest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">suggest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># reduce n_random and n_l_bfgs_b to reduce the computational load</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">suggest</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">suggest</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
 </code><br/></pre></div>
 </div>
 </div>
@@ -778,8 +835,8 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">acquisition_function</span> <span class="o">=</span> <span class="n">ThompsonSampling</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BayesianOptimization</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span> <span class="n">acquisition_function</span><span class="o">=</span><span class="n">acquisition_function</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">173</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">acquisition_function</span> <span class="o">=</span> <span class="n">ThompsonSampling</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BayesianOptimization</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span> <span class="n">acquisition_function</span><span class="o">=</span><span class="n">acquisition_function</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span><span class="n">init_points</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plot_gp</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
@@ -804,18 +861,18 @@
 <div class="highlight"><pre>
 |   iter    |  target   |     x     |
 -------------------------------------
-| <span class="ansi-black-fg">1         | </span><span class="ansi-black-fg">0.5721    | </span><span class="ansi-black-fg">-0.8809   |
-| </span><span class="ansi-magenta-fg">2         | </span><span class="ansi-magenta-fg">0.9973    | </span><span class="ansi-magenta-fg">6.511     |
-| </span><span class="ansi-black-fg">3         | </span><span class="ansi-black-fg">0.7985    | </span><span class="ansi-black-fg">4.267     |
-| </span><span class="ansi-black-fg">4         | </span><span class="ansi-black-fg">0.7342    | </span><span class="ansi-black-fg">7.82      |
-| </span><span class="ansi-black-fg">5         | </span><span class="ansi-black-fg">0.9227    | </span><span class="ansi-black-fg">0.8877    |
-| </span><span class="ansi-black-fg">6         | </span><span class="ansi-black-fg">0.5426    | </span><span class="ansi-black-fg">8.523     |
-| </span><span class="ansi-black-fg">7         | </span><span class="ansi-black-fg">0.2361    | </span><span class="ansi-black-fg">9.857     |
-| </span><span class="ansi-magenta-fg">8         | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">6.039     |
-| </span><span class="ansi-black-fg">9         | </span><span class="ansi-black-fg">1.025     | </span><span class="ansi-black-fg">5.801     |
-| </span><span class="ansi-magenta-fg">10        | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">5.934     |
+| 1         | 1.2141683 | 2.4944814 |
+| 2         | 0.3240816 | 9.4085716 |
+| 3         | 0.9616628 | 6.7839273 |
+| 4         | 1.0070261 | -0.159783 |
+| 5         | 1.0327122 | -0.075615 |
+| <span class="ansi-magenta-fg">6        </span> | <span class="ansi-magenta-fg">1.3085636</span> | <span class="ansi-magenta-fg">1.6588374</span> |
+| 7         | 0.9518282 | 1.0057953 |
+| 8         | 1.0260256 | 5.8443843 |
+| 9         | 0.8310726 | 3.0843178 |
+| <span class="ansi-magenta-fg">10       </span> | <span class="ansi-magenta-fg">1.3409715</span> | <span class="ansi-magenta-fg">1.7284422</span> |
 =====================================
-Adding GP samples to the plot... this can take up to several minutes.</span>
+Adding GP samples to the plot... this can take up to several minutes.
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -833,8 +890,8 @@ unit cost). Here we divide the EI by a specific cost function.</p>
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ExpectedImprovementPerUnitCost</span><span class="p">(</span><span class="n">acquisition</span><span class="o">.</span><span class="n">ExpectedImprovement</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">exploration_decay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exploration_decay_delay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">exploration_decay</span><span class="p">,</span> <span class="n">exploration_decay_delay</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">exploration_decay</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exploration_decay_delay</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">exploration_decay</span><span class="p">,</span> <span class="n">exploration_decay_delay</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_x</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -847,13 +904,13 @@ unit cost). Here we divide the EI by a specific cost function.</p>
         <span class="n">acq</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">super_acq</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">acq</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">suggest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">suggest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># let&#39;s get the most recently evaluated point from the target_space</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_x</span> <span class="o">=</span> <span class="n">target_space</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">suggest</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">suggest</span><span class="p">(</span><span class="n">gp</span><span class="p">,</span> <span class="n">target_space</span><span class="p">,</span> <span class="n">n_random</span><span class="p">,</span> <span class="n">n_l_bfgs_b</span><span class="p">,</span> <span class="n">fit_gp</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
 
-<span class="n">acquisition_function</span> <span class="o">=</span> <span class="n">ExpectedImprovementPerUnitCost</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BayesianOptimization</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span> <span class="n">acquisition_function</span><span class="o">=</span><span class="n">acquisition_function</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">173</span><span class="p">)</span>
+<span class="n">acquisition_function</span> <span class="o">=</span> <span class="n">ExpectedImprovementPerUnitCost</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BayesianOptimization</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span> <span class="n">acquisition_function</span><span class="o">=</span><span class="n">acquisition_function</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">optimizer</span><span class="o">.</span><span class="n">maximize</span><span class="p">(</span><span class="n">init_points</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plot_gp</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -878,17 +935,17 @@ unit cost). Here we divide the EI by a specific cost function.</p>
 <div class="highlight"><pre>
 |   iter    |  target   |     x     |
 -------------------------------------
-| <span class="ansi-black-fg">1         | </span><span class="ansi-black-fg">0.5721    | </span><span class="ansi-black-fg">-0.8809   |
-| </span><span class="ansi-magenta-fg">2         | </span><span class="ansi-magenta-fg">0.9973    | </span><span class="ansi-magenta-fg">6.511     |
-| </span><span class="ansi-black-fg">3         | </span><span class="ansi-black-fg">0.7985    | </span><span class="ansi-black-fg">4.267     |
-| </span><span class="ansi-magenta-fg">4         | </span><span class="ansi-magenta-fg">1.016     | </span><span class="ansi-magenta-fg">5.617     |
-| </span><span class="ansi-magenta-fg">5         | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">5.932     |
-| </span><span class="ansi-black-fg">6         | </span><span class="ansi-black-fg">0.45      | </span><span class="ansi-black-fg">8.875     |
-| </span><span class="ansi-black-fg">7         | </span><span class="ansi-black-fg">1.026     | </span><span class="ansi-black-fg">6.076     |
-| </span><span class="ansi-magenta-fg">8         | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">5.954     |
-| </span><span class="ansi-magenta-fg">9         | </span><span class="ansi-magenta-fg">1.027     | </span><span class="ansi-magenta-fg">5.955     |
-| </span><span class="ansi-black-fg">10        | </span><span class="ansi-black-fg">1.027     | </span><span class="ansi-black-fg">5.953     |
-=====================================</span>
+| 1         | 1.2141683 | 2.4944814 |
+| 2         | 0.3240816 | 9.4085716 |
+| 3         | 0.9616628 | 6.7839273 |
+| 4         | 0.9616653 | 6.7839105 |
+| 5         | 1.0206224 | 6.2150299 |
+| 6         | 0.8162246 | 4.3517586 |
+| <span class="ansi-magenta-fg">7        </span> | <span class="ansi-magenta-fg">1.4016724</span> | <span class="ansi-magenta-fg">1.9847738</span> |
+| 8         | 1.2149407 | 1.4942299 |
+| 9         | 1.0164502 | 0.2826411 |
+| 10        | 0.6101292 | -0.816206 |
+=====================================
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -898,14 +955,11 @@ unit cost). Here we divide the EI by a specific cost function.</p>
 <img alt="_images/acquisition_functions_12_1.png" src="_images/acquisition_functions_12_1.png" />
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
-</code></pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>
-</code></pre></div>
-</div>
-</div>
+<h2 id="Saving-and-loading-with-custom-acquisition-functions">Saving and loading with custom acquisition functions<a class="headerlink" href="#Saving-and-loading-with-custom-acquisition-functions" title="Link to this heading">¶</a></h2>
+<p>If saving and loading is desired functionality, the acquisition function needs to have a <code class="docutils literal notranslate"><span class="pre">get_acquisition_params</span></code> and <code class="docutils literal notranslate"><span class="pre">set_acquisition_params</span></code> method.</p>
+<p>Default acquisition functions have a <code class="docutils literal notranslate"><span class="pre">get_acquisition_params</span></code> and <code class="docutils literal notranslate"><span class="pre">set_acquisition_params</span></code> method that is used to save and load the acquisition function state when the optimizer is being saved and loaded. When writing and using a custom acquisition function, those methods need to also be defined. In order to have perfect replicability, all parameters that the acquisition function depends on need to be saved and loaded. The get_acquisition_params method should return a dictionary containing
+all acquisition function parameters. The set_acquisition_params method should take that same dictionary containing the acquisition function parameters and update the respective parameters.</p>
+<p>_serialize_random_state and _deserialize_random_state are provided as part of the base class and should be included in the dictionary returned by <code class="docutils literal notranslate"><span class="pre">get_acquisition_params</span></code>. See any of the default acquisition functions for reference.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
@@ -1035,7 +1089,7 @@ unit cost). Here we divide the EI by a specific cost function.</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.share", "toc.follow", "toc.sticky", "content.tabs.link", "announce.dismiss"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike", "staticVersions": null, "versionPath": "../versions.json"}}</script>
     
       
-        <script src="_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="_static/sphinx_immaterial_theme.48b1f36c1777f6fe9.min.js?v=64a73510"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
